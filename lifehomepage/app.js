@@ -10,6 +10,14 @@ var categoriesRouter = require('./routes/categories');
 
 var app = express();
 
+var mysql = require('mysql')
+var connection = mysql.createConnection({
+  host     : '192.168.0.106',
+  user     : 'nacho',
+  password : 'salsa2',
+  database : 'lifehomepage'
+});
+
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'pug');
@@ -23,6 +31,16 @@ app.use(express.static(path.join(__dirname, 'public')));
 app.use('/', indexRouter);
 app.use('/users', usersRouter);
 app.use('/', categoriesRouter);
+
+connection.connect()
+
+connection.query('SELECT 1 + 1 AS solution', function (err, rows, fields) {
+  if (err) throw err
+
+  console.log('The solution is: ', rows[0].solution)
+})
+
+connection.end()
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
