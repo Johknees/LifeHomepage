@@ -1,0 +1,5 @@
+Needed to run ALTER USER 'nacho' IDENTIFIED WITH mysql_native_password BY 'salsa2'
+
+FLUSH PRIVILEGES
+
+Unsure what this does. Need to address.
